@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include<iostream>
 #include<math.h>
 #include<ctime>
@@ -15,7 +15,7 @@ public:
 
 	Point2D(float x, float y) :m_x(x), m_y(y) {};
 	Point2D() = default;
-	Point2D(Point2D const & obj): m_x(obj.m_x), m_y(obj.m_y) {}; // конструктор копирования
+	Point2D(Point2D const & obj): m_x(obj.m_x), m_y(obj.m_y) {}; // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 
 	void SetX(float x);
 	

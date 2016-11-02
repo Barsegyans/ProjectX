@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Point2D.h"
  
 
@@ -10,25 +10,25 @@ public:
 	Box2D(float x, float y);
 	void Correctness();
 
-	double GetLength() const;// возвращает длину
-	double GetWidth() const;//возвращает ширину
+	double GetLength() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РґР»РёРЅСѓ
+	double GetWidth() const;//РІРѕР·РІСЂР°С‰Р°РµС‚ С€РёСЂРёРЅСѓ
 
-	void Move(float dx, float dy);//переещение объекта на плоскости
+	void Move(float dx, float dy);//РїРµСЂРµРµС‰РµРЅРёРµ РѕР±СЉРµРєС‚Р° РЅР° РїР»РѕСЃРєРѕСЃС‚Рё
 
-	void SetLcorner(float x, float y);//изменить координаты левого угла
-	void SetRcorner(float x, float y);//изменить координаты правого угла
+	void SetLcorner(float x, float y);//РёР·РјРµРЅРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ Р»РµРІРѕРіРѕ СѓРіР»Р°
+	void SetRcorner(float x, float y);//РёР·РјРµРЅРёС‚СЊ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїСЂР°РІРѕРіРѕ СѓРіР»Р°
 
-	float GetLcornerX() const;// возвращает координату х левого угла
-	float GetLcornerY() const;// возвращает координату у левого угла
-	float GetRcornerX() const;// возвращает координату х правого угла
-	float GetRcornerY() const;// возвращает координату у правого угла
-	float GetCenterX() const;// возвращает координату х центра
-	float GetCenterY() const;// возвращает координату у центра
-
-	
+	float GetLcornerX() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ С… Р»РµРІРѕРіРѕ СѓРіР»Р°
+	float GetLcornerY() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ Сѓ Р»РµРІРѕРіРѕ СѓРіР»Р°
+	float GetRcornerX() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ С… РїСЂР°РІРѕРіРѕ СѓРіР»Р°
+	float GetRcornerY() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ Сѓ РїСЂР°РІРѕРіРѕ СѓРіР»Р°
+	float GetCenterX() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ С… С†РµРЅС‚СЂР°
+	float GetCenterY() const;// РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ Сѓ С†РµРЅС‚СЂР°
 
 	
-	bool Intersection(Box2D const & obj) const;//проверка на пересечение
+
+	
+	bool Intersection(Box2D const & obj) const;//РїСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµСЃРµС‡РµРЅРёРµ
 
 
 private:

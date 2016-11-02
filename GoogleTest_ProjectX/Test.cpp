@@ -1,4 +1,4 @@
-#include"gtest/gtest.h"
+п»ї#include"gtest/gtest.h"
 #include"Figures.h"
 #include<conio.h>
 #include "Point2D.h"
@@ -6,17 +6,17 @@
 
 TEST(Point2D_test, test_construction)
 {
-	// Тест на создание объекта по умолчанию.
+	// РўРµСЃС‚ РЅР° СЃРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
 	Point2D p1;
 	EXPECT_EQ(p1.GetX(), 0.0f);
 	EXPECT_EQ(p1.GetY(), 0.0f);
 
-	// Тест на создание объекта с параметрами.
+	// РўРµСЃС‚ РЅР° СЃРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° СЃ РїР°СЂР°РјРµС‚СЂР°РјРё.
 	Point2D p2 = { 1.2f, 2.4f };
 	EXPECT_EQ(p2.GetX(), 1.2f);
 	EXPECT_EQ(p2.GetY(), 2.4f);
 
-	// Тест на создание копии объекта.
+	// РўРµСЃС‚ РЅР° СЃРѕР·РґР°РЅРёРµ РєРѕРїРёРё РѕР±СЉРµРєС‚Р°.
 	Point2D p3 = p2;
 	EXPECT_EQ(p3, p2);
 }

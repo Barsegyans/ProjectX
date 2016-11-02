@@ -1,4 +1,4 @@
-#include "Figures.h"
+ï»¿#include "Figures.h"
 
 Box2D::Box2D(float x, float y, float x1, float y1) 
 {	
@@ -96,17 +96,15 @@ float Box2D::GetCenterY() const
 
 bool Box2D::Intersection(Box2D const & box) const
 {
-  
-    if (m_rCorner.GetX() < box.GetLcornerX()) return false;
-    if (m_lCorner.GetX() > box.GetRcornerX()) return false; 
-    if (m_rCorner.GetY() < box.GetLcornerY()) return false;
-    if (m_lCorner.GetY() > box.GetRcornerY()) return false;
-    return true; 
-  
+  if (m_rCorner.GetX() < box.GetLcornerX()) return false;
+  if (m_lCorner.GetX() > box.GetRcornerX()) return false; 
+  if (m_rCorner.GetY() < box.GetLcornerY()) return false;
+  if (m_lCorner.GetY() > box.GetRcornerY()) return false;
+    return true;  
 };
 
 
-///////////////////////////////////////////ËÓ×
+///////////////////////////////////////////Ð›Ð£Ð§
 
 Ray2D::Ray2D(float x0, float y0, float x, float y) :m_origin(x0, y0), m_direction(x , y ) {};
 Ray2D::Ray2D() = default;
@@ -152,7 +150,6 @@ bool Ray2D::Intersection(Box2D const & b) const
 	if (GetDirectionY() > 0)
 	{
 		if (b.GetRcornerY() < GetOriginY())
-
 			return false;
 	}
 	if (GetDirectionY() < 0)
