@@ -1,42 +1,38 @@
 #include"gtest/gtest.h"
 #include"Figures.h"
 #include<conio.h>
-#include "Space2D.h"
+#include "Point2D.h"
 
 
-
-
-TEST(Space2d_test, test_construction)
+TEST(Point2D_test, test_construction)
 {
 	// Тест на создание объекта по умолчанию.
-	Space2D p1;
-	EXPECT_EQ(p1.getX(), 0.0f);
-	EXPECT_EQ(p1.getY(), 0.0f);
+	Point2D p1;
+	EXPECT_EQ(p1.GetX(), 0.0f);
+	EXPECT_EQ(p1.GetY(), 0.0f);
 
 	// Тест на создание объекта с параметрами.
-	Space2D p2 = { 1.2f, 2.4f };
-	EXPECT_EQ(p2.getX(), 1.2f);
-	EXPECT_EQ(p2.getY(), 2.4f);
+	Point2D p2 = { 1.2f, 2.4f };
+	EXPECT_EQ(p2.GetX(), 1.2f);
+	EXPECT_EQ(p2.GetY(), 2.4f);
 
 	// Тест на создание копии объекта.
-	Space2D p3 = p2;
+	Point2D p3 = p2;
 	EXPECT_EQ(p3, p2);
 }
 
-TEST(Space2d_test, test_initializer_list)
+TEST(Point2D_test, test_initializer_list)
 {
-	Space2D p1 = { 1.0f, 2.0f};
-	EXPECT_EQ(p1.getX(), 1.0f);
-	EXPECT_EQ(p1.getY(), 2.0f);
-
+	Point2D p1 = { 1.0f, 2.0f};
+	EXPECT_EQ(p1.GetX(), 1.0f);
+	EXPECT_EQ(p1.GetY(), 2.0f);
 }
 
-TEST(Space2d_test, test_assignment)
+TEST(Point2D_test, test_assignment)
 {
-	Space2D p1;
+	Point2D p1;
 	p1 = { 1.2f, 2.4f };
-	EXPECT_EQ(p1, Space2D(1.2f, 2.4f));
- 
+	EXPECT_EQ(p1, Point2D(1.2f, 2.4f));
 }
 
 
@@ -49,39 +45,28 @@ TEST(box_test, box_test)
 	Box2D box2(-1, -1, 2, 2);
 	Box2D box3(-1, -1, 0, 0);
 
-	EXPECT_EQ(box1.getLength(), 1);
-	EXPECT_EQ(box1.getLcornerX(), 0);
-	EXPECT_EQ(box1.getRcornerY(), 1);
+	EXPECT_EQ(box1.GetLength(), 1);
+	EXPECT_EQ(box1.GetLcornerX(), 0);
+	EXPECT_EQ(box1.GetRcornerY(), 1);
 
-	box1.move(1, 1);
-	EXPECT_EQ(box1.getLcornerY(), 1);
-	EXPECT_EQ(box1.getRcornerX(), 2);
+	box1.Move(1, 1);
+	EXPECT_EQ(box1.GetLcornerY(), 1);
+	EXPECT_EQ(box1.GetRcornerX(), 2);
 
-	box1.setLcorner(0, 0);
-	box1.setRcorner(1, 1);
-	EXPECT_EQ(box1.getLcornerX(), 0);
-	EXPECT_EQ(box1.getRcornerY(), 1);
+	box1.SetLcorner(0, 0);
+	box1.SetRcorner(1, 1);
+	EXPECT_EQ(box1.GetLcornerX(), 0);
+	EXPECT_EQ(box1.GetRcornerY(), 1);
 
-
-	EXPECT_EQ(box1.intersection(box2), false);
-	EXPECT_EQ(box1.intersection(box3), true);
-	EXPECT_EQ(box1.intersection(box1), true);
-	EXPECT_EQ(box2.intersection(box2), true);
-	EXPECT_EQ(box2.intersection(box3), true);
-	EXPECT_EQ(box2.intersection(box1), false);
-	EXPECT_EQ(box3.intersection(box1), true);
-	EXPECT_EQ(box3.intersection(box2), true);
-	EXPECT_EQ(box3.intersection(box3), true);
-
-	EXPECT_EQ(box1.include(box2), false);
-	EXPECT_EQ(box1.include(box3), false);
-	EXPECT_EQ(box1.include(box1), false);
-	EXPECT_EQ(box2.include(box2), false);
-	EXPECT_EQ(box2.include(box3), false);
-	EXPECT_EQ(box2.include(box1), true);
-	EXPECT_EQ(box3.include(box1), false);
-	EXPECT_EQ(box3.include(box2), false);
-	EXPECT_EQ(box3.include(box3), false);
+	EXPECT_EQ(box1.Intersection(box2), true);
+	EXPECT_EQ(box1.Intersection(box3), true);
+	EXPECT_EQ(box1.Intersection(box1), true);
+	EXPECT_EQ(box2.Intersection(box2), true);
+	EXPECT_EQ(box2.Intersection(box3), true);
+	EXPECT_EQ(box2.Intersection(box1), true);
+	EXPECT_EQ(box3.Intersection(box1), true);
+	EXPECT_EQ(box3.Intersection(box2), true);
+	EXPECT_EQ(box3.Intersection(box3), true);
 
 
 }
@@ -91,13 +76,12 @@ TEST(ray_test, box_test)
 	Ray2D ray2( 2, 2);
 	Ray2D ray3(-1, -1, 0, 0);
 
-	EXPECT_EQ(ray1.getDirectionX(), 1);
-	EXPECT_EQ(ray2.getDirectionY(), 2);
-	EXPECT_EQ(ray3.getOriginX(), -1);
-	EXPECT_EQ(ray2.getOriginY(), 0);
+	EXPECT_EQ(ray1.GetDirectionX(), 1);
+	EXPECT_EQ(ray2.GetDirectionY(), 2);
+	EXPECT_EQ(ray3.GetOriginX(), -1);
+	EXPECT_EQ(ray2.GetOriginY(), 0);
 	
-	EXPECT_EQ(ray1.getK(), 1);
-
+	EXPECT_EQ(ray1.GetK(), 1);
 }
 TEST(rayBox_test, ray_and_box_intersection)
 {
@@ -109,20 +93,14 @@ TEST(rayBox_test, ray_and_box_intersection)
 	Box2D box2(-2, -2, 1, 1);
 	Box2D box3(5, 5, 7, 7);
 
-
-	EXPECT_EQ(ray1.intersection(box1), true);
-	EXPECT_EQ(ray1.intersection(box2), true);
-	EXPECT_EQ(ray1.intersection(box3), true);
-	EXPECT_EQ(ray2.intersection(box1), false);
-	EXPECT_EQ(ray2.intersection(box2), false);
-	EXPECT_EQ(ray2.intersection(box3), true);
-	EXPECT_EQ(ray3.intersection(box1), true);
-	EXPECT_EQ(ray3.intersection(box2), true);
-	EXPECT_EQ(ray3.intersection(box3), false);
-
-	
-}
-TEST(pause, pause)
-{
-	system("pause");
+	EXPECT_EQ(ray1.Intersection(box1), true);
+	EXPECT_EQ(ray1.Intersection(box2), true);
+	EXPECT_EQ(ray1.Intersection(box3), true);
+	EXPECT_EQ(ray2.Intersection(box1), false);
+	EXPECT_EQ(ray2.Intersection(box2), false);
+	EXPECT_EQ(ray2.Intersection(box3), true);
+	EXPECT_EQ(ray3.Intersection(box1), true);
+	EXPECT_EQ(ray3.Intersection(box2), true);
+	EXPECT_EQ(ray3.Intersection(box3), false);
+  system("pause");
 }

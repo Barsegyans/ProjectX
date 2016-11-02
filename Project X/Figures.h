@@ -1,42 +1,42 @@
 #pragma once
-#include "Space2D.h"
+#include "Point2D.h"
  
 
-class Box2D :public Space2D
+class Box2D 
 {
 public:
 	Box2D(float x, float y, float x1, float y1);
 	Box2D();
 	Box2D(float x, float y);
-	void correctness();
+	void Correctness();
 
-	double getLength();// возвращает длину
-	double getWidth();//возвращает ширину
+	double GetLength() const;// возвращает длину
+	double GetWidth() const;//возвращает ширину
 
-	void move(float dx, float dy);//переещение объекта на плоскости
+	void Move(float dx, float dy);//переещение объекта на плоскости
 
-	void setLcorner(float x, float y);//изменить координаты левого угла
-	void setRcorner(float x, float y);//изменить координаты правого угла
+	void SetLcorner(float x, float y);//изменить координаты левого угла
+	void SetRcorner(float x, float y);//изменить координаты правого угла
 
-	float getLcornerX();// возвращает координату х левого угла
-	float getLcornerY();// возвращает координату у левого угла
-	float getRcornerX();// возвращает координату х правого угла
-	float getRcornerY();// возвращает координату у правого угла
-	float getCenterX();// возвращает координату х центра
-	float getCenterY();// возвращает координату у центра
-
-	void address(); //выводит на экран адрес
+	float GetLcornerX() const;// возвращает координату х левого угла
+	float GetLcornerY() const;// возвращает координату у левого угла
+	float GetRcornerX() const;// возвращает координату х правого угла
+	float GetRcornerY() const;// возвращает координату у правого угла
+	float GetCenterX() const;// возвращает координату х центра
+	float GetCenterY() const;// возвращает координату у центра
 
 	
-	bool intersection(Box2D & obj);//проверка на пересечение
-	bool include(Box2D & pol); //включение
+
+	
+	bool Intersection(Box2D const & obj) const;//проверка на пересечение
+
 
 private:
-	Space2D m_Lcorner, m_Rcorner,m_center;
+	Point2D m_lCorner, m_rCorner;
 
 };
 
-class Ray2D :public Space2D
+class Ray2D 
 {
 public:
 
@@ -44,18 +44,17 @@ public:
 	Ray2D();
 	Ray2D(float x, float y);
 
-	float getOriginX();
-	float getOriginY();
-
-	float getDirectionX();
-	float getDirectionY();
-	float getK();
-	void updateK();
+	float GetOriginX() const;
+	float GetOriginY()const;
+		  
+	float GetDirectionX() const;
+	float GetDirectionY() const;
+	float GetK() const;
 
 	
-	bool intersection(Box2D & obj);
+	bool Intersection(Box2D const & obj) const;
 private:
-	Space2D m_origin, m_direction;
-	float m_k = 0.0f;
+	Point2D m_origin, m_direction;
+	float m_k = (m_direction.GetY()) / (m_direction.GetX());
 };
 

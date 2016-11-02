@@ -1,4 +1,4 @@
-#include "Space2D.h"
+#include "Point2D.h"
 
 bool belong(float a, float b, float c)
 {
@@ -12,38 +12,38 @@ bool EqualWithEps(float v1, float v2)
 }
 
 
-void Space2D:: setX(float x)
+void Point2D:: SetX(float x) 
 {
 	m_x = x;
 };
-void Space2D::setY(float y)
+void Point2D::SetY(float y)
 {
 	m_y = y;
 };
 
-float Space2D::getX()
+float Point2D::GetX() const
 {
 	return m_x;
 }
-float  Space2D::getY()
+float  Point2D::GetY() const
 {
 	return m_y;
 }
-void Space2D::Space2D::addX(float x)
+void Point2D::Point2D::AddX(float x)
 {
 	m_x += x;
 };
-void Space2D::addY(float y)
+void Point2D::AddY(float y)
 {
 	m_y += y;
 };
 
 
-bool  Space2D::operator == (Space2D const & obj) const
+bool  Point2D::operator == (Point2D const & obj) const
 {
 	return EqualWithEps(m_x, obj.m_x) && EqualWithEps(m_y, obj.m_y);
 }
-Space2D &  Space2D::operator = (Space2D const & obj)
+Point2D &  Point2D::operator = (Point2D const & obj)
 {
 	if (this == &obj) return *this;
 	m_x = obj.m_x;
@@ -51,4 +51,4 @@ Space2D &  Space2D::operator = (Space2D const & obj)
 	return *this;
 }
 
-Space2D::~Space2D() = default;
+Point2D::~Point2D() = default;
