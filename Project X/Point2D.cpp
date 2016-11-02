@@ -2,53 +2,51 @@
 
 bool belong(float a, float b, float c)
 {
-	return  ((((b >= a)) && (b <= c))
-		|| ((b >= c) && (b <= a)));
+  return  ((((b >= a)) && (b <= c))
+    || ((b >= c) && (b <= a)));
 
 }
 bool EqualWithEps(float v1, float v2)
 {
-	return fabs(v1 - v2) < kEps;
+  return fabs(v1 - v2) < kEps;
 }
 
 
 void Point2D:: SetX(float x) 
 {
-	m_x = x;
+  m_x = x;
 };
 void Point2D::SetY(float y)
 {
-	m_y = y;
+  m_y = y;
 };
 
 float Point2D::GetX() const
 {
-	return m_x;
+  return m_x;
 }
 float  Point2D::GetY() const
 {
-	return m_y;
+  return m_y;
 }
 void Point2D::Point2D::AddX(float x)
 {
-	m_x += x;
+  m_x += x;
 };
 void Point2D::AddY(float y)
 {
-	m_y += y;
+  m_y += y;
 };
 
 
 bool  Point2D::operator == (Point2D const & obj) const
 {
-	return EqualWithEps(m_x, obj.m_x) && EqualWithEps(m_y, obj.m_y);
+  return EqualWithEps(m_x, obj.m_x) && EqualWithEps(m_y, obj.m_y);
 }
 Point2D &  Point2D::operator = (Point2D const & obj)
 {
-	if (this == &obj) return *this;
-	m_x = obj.m_x;
-	m_y = obj.m_y;
-	return *this;
+  if (this == &obj) return *this;
+  m_x = obj.m_x;
+  m_y = obj.m_y;
+  return *this;
 }
-
-Point2D::~Point2D() = default;

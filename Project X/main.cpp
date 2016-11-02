@@ -7,6 +7,6 @@ int main()
 {
 
 
-	_getch();
-	return 0;
+  _getch();
+  return 0;
 }
