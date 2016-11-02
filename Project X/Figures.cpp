@@ -56,12 +56,12 @@ void Box2D::Move(float dx, float dy)
 void Box2D::SetLcorner(float x, float y)
 {
   m_lCorner = { x, y };
-  void correctness();
+  Correctness();
 }
 void Box2D::SetRcorner(float x, float y)
 {
   m_rCorner = { x, y };
-  void correctness();
+  Correctness();
 }
 
 Point2D Box2D::GetLCorner() const
@@ -76,7 +76,6 @@ Point2D Box2D::GetCenter() const
 {
   return Point2D((GetRCorner().GetX()- GetLCorner().GetX())/2, (GetRCorner().GetY() - GetLCorner().GetY()) / 2);
 }
-
 
 bool Box2D::Intersection(Box2D const & box) const
 {
@@ -103,7 +102,6 @@ float Ray2D::GetOriginY() const
 {
   return m_origin.GetY();
 }
-
 float Ray2D::GetDirectionX() const
 {
   return m_direction.GetX();
@@ -116,7 +114,6 @@ float Ray2D::GetK() const
 {
   return m_k;
 }
-
 
 bool Ray2D::Intersection(Box2D const & b) const
 {
@@ -161,9 +158,9 @@ bool Ray2D::Intersection(Box2D const & b) const
         if (b.GetRCorner().GetX() >= GetOriginX())
           return true;
       if (GetDirectionX() < 0)
-	if (b.GetLCorner().GetX() <= GetOriginX())
+      	if (b.GetLCorner().GetX() <= GetOriginX())
           return true;
-  }
+    }
   }
 
   float x0, y0, x1, y1;

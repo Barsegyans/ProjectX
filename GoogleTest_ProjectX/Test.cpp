@@ -40,9 +40,11 @@ TEST(box_test, box_test)
   EXPECT_EQ(box1.GetHeight(), 1);
   EXPECT_EQ(box1.GetLCorner().GetX(), 0);
   EXPECT_EQ(box1.GetRCorner().GetY(), 1);
+
   box1.Move(1, 1);
   EXPECT_EQ(box1.GetLCorner().GetY(), 1);
   EXPECT_EQ(box1.GetRCorner().GetX(), 2);
+
   box1.SetLcorner(0, 0);
   box1.SetRcorner(1, 1);
   EXPECT_EQ(box1.GetLCorner().GetX(), 0);
@@ -57,8 +59,6 @@ TEST(box_test, box_test)
   EXPECT_EQ(box3.Intersection(box1), true);
   EXPECT_EQ(box3.Intersection(box2), true);
   EXPECT_EQ(box3.Intersection(box3), true);
-
-
 }
 TEST(ray_test, box_test)
 {
@@ -92,5 +92,4 @@ TEST(rayBox_test, ray_and_box_intersection)
   EXPECT_EQ(ray3.Intersection(box1), true);
   EXPECT_EQ(ray3.Intersection(box2), true);
   EXPECT_EQ(ray3.Intersection(box3), false);
-  system("pause");
 }

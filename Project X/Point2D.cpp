@@ -11,7 +11,6 @@ bool EqualWithEps(float v1, float v2)
   return fabs(v1 - v2) < kEps;
 }
 
-
 void Point2D:: SetX(float x) 
 {
   m_x = x;
@@ -19,7 +18,7 @@ void Point2D:: SetX(float x)
 void Point2D::SetY(float y)
 {
   m_y = y;
-};
+}
 
 float Point2D::GetX() const
 {
@@ -32,12 +31,11 @@ float  Point2D::GetY() const
 void Point2D::Point2D::AddX(float x)
 {
   m_x += x;
-};
+}
 void Point2D::AddY(float y)
 {
   m_y += y;
-};
-
+}
 
 bool  Point2D::operator == (Point2D const & obj) const
 {
