@@ -8,15 +8,14 @@ Box2D::Box2D(float x, float y, float x1, float y1)
 }
 Box2D::Box2D(Point2D const &  lCorner,Point2D const &  rCorner)
 {
-	m_lCorner = lCorner;
-	m_rCorner = rCorner;
-	Correctness();
+  m_lCorner = lCorner;
+  m_rCorner = rCorner;
+  Correctness();
 }
 Box2D::Box2D(Box2D const & b)
 {
-	m_lCorner =b.GetLCorner();
-	m_rCorner =b.GetRCorner();
-	Correctness();
+  *this=b;
+  Correctness();
 }
 Box2D::Box2D(float x, float y) 
 {
@@ -111,7 +110,7 @@ Ray2D::Ray2D(float x0, float y0, float x, float y) :m_origin(x0, y0), m_directio
 
 Ray2D::Ray2D(Ray2D const & b)
 {
-	*this=b;
+  *this=b;
 }
 
 Ray2D::Ray2D(float x, float y) :m_origin(0.0f, 0.0f), m_direction(x , y ) {};
@@ -195,7 +194,7 @@ bool Ray2D::Intersection(Box2D const & b) const
 
 Ray2D & Ray2D::operator = (Ray2D const & obj)
 {
-	m_origin=obj.GetOrigin();
+  m_origin=obj.GetOrigin();
   m_direction=obj.GetDirection();
   return *this;
 }

@@ -51,6 +51,6 @@ Point2D &  Point2D::operator = (Point2D const & obj)
 
 std::ostream & operator << (std::ostream & os, Point2D const & obj)
 {
-	os << "Point2D {" << obj.GetX() << ", " << obj.GetY() << "}";
-	return os;
+  os << "Point2D {" << obj.GetX() << ", " << obj.GetY() << "}";
+  return os;
 }

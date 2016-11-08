@@ -9,7 +9,7 @@ public:
   Box2D()=default;
   Box2D(Box2D const & b);
   Box2D(float x, float y);
-	Box2D(Point2D const &  lCorner, Point2D const &  rCorner);
+  Box2D(Point2D const &  lCorner, Point2D const &  rCorner);
 
   void Correctness();
   double GetHeight() const;// возвращает длину
@@ -24,7 +24,7 @@ public:
   Point2D GetCenter() const;
 	
   bool Intersection(Box2D const & obj) const;//проверка на пересечение
-	Box2D & operator = (Box2D const & obj);
+  Box2D & operator = (Box2D const & obj);
 
   ~Box2D()=default;
 private:
@@ -37,14 +37,14 @@ class Ray2D
 public:
   Ray2D(float x0, float y0, float x, float y) ;
   Ray2D()=default;
-	Ray2D(Ray2D const & b);
-	Ray2D(Point2D  const & origin,Point2D  const & direction);
+  Ray2D(Ray2D const & b);
+  Ray2D(Point2D  const & origin,Point2D  const & direction);
   Ray2D(float x, float y);
-	Point2D GetOrigin() const;
-	Point2D GetDirection() const;
+  Point2D GetOrigin() const;
+  Point2D GetDirection() const;
   float GetK() const;
   bool Intersection(Box2D const & obj) const;
-	Ray2D & operator = (Ray2D const & obj);
+  Ray2D & operator = (Ray2D const & obj);
 
   ~Ray2D() = default;
 private:
