@@ -3,8 +3,10 @@
 #include<math.h>
 #include<ctime>
 #include <string> 
-float const kEps = 1e-5;
-float const pi = 3.14159265358979323846;
+#include <ostream>
+
+float const kEps = 1e-5f;
+float const pi = 3.14159265358979323846f;
 bool belong(float a, float b, float c);
 
 bool EqualWithEps(float v1, float v2);
@@ -23,10 +25,11 @@ public:
   void AddY(float y);
   bool operator == (Point2D const & obj) const;
   Point2D & operator = (Point2D const & obj);
-  ~Point2D()=default;
 
+  ~Point2D()=default;
 private:
 	
   float m_x = 0.0f, m_y = 0.0f;
 
 };
+	std::ostream & operator << (std::ostream & os, Point2D const & obj);

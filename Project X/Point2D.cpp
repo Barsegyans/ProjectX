@@ -48,3 +48,9 @@ Point2D &  Point2D::operator = (Point2D const & obj)
   m_y = obj.m_y;
   return *this;
 }
+
+std::ostream & operator << (std::ostream & os, Point2D const & obj)
+{
+	os << "Point2D {" << obj.GetX() << ", " << obj.GetY() << "}";
+	return os;
+}
