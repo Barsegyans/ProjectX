@@ -75,15 +75,15 @@ void Box2D::SetRcorner(float x, float y)
   Correctness();
 }
 
-Point2D Box2D::GetLCorner() const
+Point2D  Box2D::GetLCorner() const &
 {
   return m_lCorner;
 }
-Point2D Box2D::GetRCorner() const
+Point2D  Box2D::GetRCorner() const & 
 {
   return m_rCorner;
 }
-Point2D Box2D::GetCenter() const
+Point2D   Box2D::GetCenter() const &
 {
   return Point2D((GetRCorner().GetX()+ GetLCorner().GetX())/2, (GetRCorner().GetY() + GetLCorner().GetY()) / 2);
 }
@@ -120,12 +120,12 @@ Ray2D::Ray2D(Point2D const &  origin, Point2D const &  direction)
   m_origin=origin;
   m_direction=direction;
 };
-Point2D Ray2D::GetOrigin() const
+Point2D  Ray2D::GetOrigin() const & 
 {
   return m_origin;
 }
 
-Point2D Ray2D::GetDirection() const
+Point2D  Ray2D::  GetDirection() const &
 {
   return m_direction;
 }

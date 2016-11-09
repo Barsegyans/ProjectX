@@ -1,10 +1,9 @@
-#pragma once
+п»ї#pragma once
 #include"Figures.h"
 #include "Bullet.h"
-#include"Figures.h"
 
 
-class Gun : public Box2D
+class Gun : public GameEntity
 {
 public:
   Gun()=default;
@@ -14,8 +13,7 @@ public:
 
 ~Gun()=default;
 private:
-  bool m_fired=false;// true если пуля в полете
+  bool m_fired=false;// true РµСЃР»Рё РїСѓР»СЏ РІ РїРѕР»РµС‚Рµ
   float m_speed;
-  float rate=1; //скорострельность пуль/сек
-  float m_health=100;
+  float rate=1; //СЃРєРѕСЂРѕСЃС‚СЂРµР»СЊРЅРѕСЃС‚СЊ РїСѓР»СЊ/СЃРµРє
 };

@@ -42,7 +42,7 @@ TEST(box_test, box_test)
   Box2D box1(0, 0, 1, 1);
   Box2D box2(-1, -1, 2, 2);
   Box2D box3(-1, -1, 0, 0);
-	Box2D box4(Point2D(1,0), Point2D (2,1));
+  Box2D box4(Point2D(1,0), Point2D (2,1));
 
   EXPECT_EQ(box1.GetHeight(), 1);
   EXPECT_EQ(box1.GetLCorner().GetX(), 0);
@@ -126,14 +126,14 @@ TEST(Alien_test, test_construction)
   Alien a2(box);
   Alien a3(Box2D(Point2D(2,2), Point2D(3, 3)));
  
-  EXPECT_EQ(a1.GetLCorner(),Point2D(1,1));
-  EXPECT_EQ(a1.GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(a1.GetBody().GetLCorner(),Point2D(1,1));
+  EXPECT_EQ(a1.GetBody().GetRCorner(), Point2D(2, 2));
 											 
-  EXPECT_EQ(a2.GetLCorner(), Point2D(0, 0));
-  EXPECT_EQ(a2.GetRCorner(), Point2D(1, 1));
+  EXPECT_EQ(a2.GetBody().GetLCorner(), Point2D(0, 0));
+  EXPECT_EQ(a2.GetBody().GetRCorner(), Point2D(1, 1));
 												 
-  EXPECT_EQ(a3.GetLCorner(), Point2D(2, 2));
-  EXPECT_EQ(a3.GetRCorner(), Point2D(3, 3));
+  EXPECT_EQ(a3.GetBody().GetLCorner(), Point2D(2, 2));
+  EXPECT_EQ(a3.GetBody().GetRCorner(), Point2D(3, 3));
 }
 
 TEST(Gun_test, test_construction)
@@ -143,14 +143,14 @@ TEST(Gun_test, test_construction)
   Gun g2(box);
   Gun g3(Box2D(Point2D(2, 2), Point2D(3, 3)));
 
-  EXPECT_EQ(g1.GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(g1.GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(g1.GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(g1.GetBody().GetRCorner(), Point2D(2, 2));
   									 
-  EXPECT_EQ(g2.GetLCorner(), Point2D(0, 0));
-  EXPECT_EQ(g2.GetRCorner(), Point2D(1, 1));
+  EXPECT_EQ(g2.GetBody().GetLCorner(), Point2D(0, 0));
+  EXPECT_EQ(g2.GetBody().GetRCorner(), Point2D(1, 1));
 											 
-  EXPECT_EQ(g3.GetLCorner(), Point2D(2, 2));
-  EXPECT_EQ(g3.GetRCorner(), Point2D(3, 3));
+  EXPECT_EQ(g3.GetBody().GetLCorner(), Point2D(2, 2));
+  EXPECT_EQ(g3.GetBody().GetRCorner(), Point2D(3, 3));
 }
 TEST(Bullet_test, test_construction)
 {
@@ -160,20 +160,20 @@ TEST(Bullet_test, test_construction)
   Bullet b1(1,1,2,2,0,1);
   Bullet b2(box,ray.GetDirection());
 
-  EXPECT_EQ(b1.GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(b1.GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(b1.GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(b1.GetBody().GetRCorner(), Point2D(2, 2));
 
-  EXPECT_EQ(b2.GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(b2.GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(b2.GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(b2.GetBody().GetRCorner(), Point2D(2, 2));
 
-  EXPECT_EQ(b1.GetDirection(), Point2D(0, 1));
-  EXPECT_EQ(b2.GetDirection(), Point2D(1, 0));
+  EXPECT_EQ(b1.GetRay().GetDirection(), Point2D(0, 1));
+  EXPECT_EQ(b2.GetRay().GetDirection(), Point2D(1, 0));
 
-  EXPECT_EQ(b1.GetOrigin(), Point2D(1.5f, 1.5f));
-  EXPECT_EQ(b2.GetOrigin(), Point2D(1.5f, 1.5f));
+  EXPECT_EQ(b1.GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
+  EXPECT_EQ(b2.GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
 
   EXPECT_EQ(b1.GetDamage(), 100);
-  EXPECT_EQ(b2.GetSpeed(), 1);
+
 }
 TEST(Obstacle_test, test_construction)
 {
@@ -182,14 +182,14 @@ TEST(Obstacle_test, test_construction)
   Obstacle o2 (box);
   Obstacle o3 (Box2D(Point2D(2, 2), Point2D(3, 3)));
 						
-  EXPECT_EQ(o1.GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(o1.GetRCorner(), Point2D(2, 2));
-					
-  EXPECT_EQ(o2.GetLCorner(), Point2D(0, 0));
-  EXPECT_EQ(o2.GetRCorner(), Point2D(1, 1));
-						
-  EXPECT_EQ(o3.GetLCorner(), Point2D(2, 2));
-  EXPECT_EQ(o3.GetRCorner(), Point2D(3, 3));
+  EXPECT_EQ(o1.GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(o1.GetBody().GetRCorner(), Point2D(2, 2));
+					        
+  EXPECT_EQ(o2.GetBody().GetLCorner(), Point2D(0, 0));
+  EXPECT_EQ(o2.GetBody().GetRCorner(), Point2D(1, 1));
+						      
+  EXPECT_EQ(o3.GetBody().GetLCorner(), Point2D(2, 2));
+  EXPECT_EQ(o3.GetBody().GetRCorner(), Point2D(3, 3));
 
   Bullet b(-1,-1,0,0,1,1);
   o2.Hit(b);
@@ -205,10 +205,10 @@ TEST(Space_test, test_construction)
  
   EXPECT_EQ(s1.GetLCorner(), Point2D(0, 0));
   EXPECT_EQ(s1.GetRCorner(), Point2D(1, 1));
-						
+						  
   EXPECT_EQ(s2.GetLCorner(), Point2D(0, 0));
   EXPECT_EQ(s2.GetRCorner(), Point2D(1, 1));
-						
+						  
   EXPECT_EQ(s3.GetLCorner(), Point2D(2, 2));
   EXPECT_EQ(s3.GetRCorner(), Point2D(3, 3));
 }

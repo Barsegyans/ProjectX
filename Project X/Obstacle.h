@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 #include "Figures.h"
 #include"Bullet.h"
 
-class Obstacle : public Box2D
+class Obstacle : public GameEntity
 {
 public:
   Obstacle() = default;
@@ -10,12 +10,7 @@ public:
   Obstacle(Point2D const &  a,Point2D const &  b);
   Obstacle(float x, float y, float x1, float y1);
 
-  void Hit(Bullet const & b);
-  float GetHealth() const;
-
   ~Obstacle() = default;
-private:
-  float m_health = 1000;
 };
 
  

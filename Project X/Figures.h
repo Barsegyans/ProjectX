@@ -19,9 +19,9 @@ public:
   void SetLcorner(float x, float y);//изменить координаты левого угла
   void SetRcorner(float x, float y);//изменить координаты правого угла
 
-  Point2D GetLCorner() const;
-  Point2D GetRCorner() const;
-  Point2D GetCenter() const;
+  Point2D  GetLCorner()const &;
+  Point2D  GetRCorner()const &;
+  Point2D  GetCenter()const &;
 	
   bool Intersection(Box2D const & obj) const;//проверка на пересечение
   Box2D & operator = (Box2D const & obj);
@@ -40,8 +40,8 @@ public:
   Ray2D(Ray2D const & b);
   Ray2D(Point2D  const & origin,Point2D  const & direction);
   Ray2D(float x, float y);
-  Point2D GetOrigin() const;
-  Point2D GetDirection() const;
+  Point2D  GetOrigin() const & ;
+  Point2D   GetDirection() const &;
   float GetK() const;
   bool Intersection(Box2D const & obj) const;
   Ray2D & operator = (Ray2D const & obj);
