@@ -6,6 +6,17 @@ Box2D::Box2D(float x, float y, float x1, float y1)
   m_rCorner = Point2D(x1, y1);
   Correctness();
 }
+Box2D::Box2D(Point2D const &  lCorner,Point2D const &  rCorner)
+{
+  m_lCorner = lCorner;
+  m_rCorner = rCorner;
+  Correctness();
+}
+Box2D::Box2D(Box2D const & b)
+{
+  *this=b;
+  Correctness();
+}
 Box2D::Box2D(float x, float y) 
 {
   m_lCorner=Point2D(0.0f, 0.0f);
@@ -64,17 +75,17 @@ void Box2D::SetRcorner(float x, float y)
   Correctness();
 }
 
-Point2D Box2D::GetLCorner() const
+Point2D  Box2D::GetLCorner() const &
 {
   return m_lCorner;
 }
-Point2D Box2D::GetRCorner() const
+Point2D  Box2D::GetRCorner() const & 
 {
   return m_rCorner;
 }
-Point2D Box2D::GetCenter() const
+Point2D   Box2D::GetCenter() const &
 {
-  return Point2D((GetRCorner().GetX()- GetLCorner().GetX())/2, (GetRCorner().GetY() - GetLCorner().GetY()) / 2);
+  return Point2D((GetRCorner().GetX()+ GetLCorner().GetX())/2, (GetRCorner().GetY() + GetLCorner().GetY()) / 2);
 }
 
 bool Box2D::Intersection(Box2D const & box) const
@@ -86,30 +97,39 @@ bool Box2D::Intersection(Box2D const & box) const
     return true; 
   box.GetLCorner().GetX();
 };
-
+Box2D & Box2D::operator = (Box2D const & obj)
+{
+  m_lCorner=obj.GetLCorner();
+  m_rCorner=obj.GetRCorner();
+	return *this;
+}
 
 ///////////////////////////////////////////ЛУЧ
 
 Ray2D::Ray2D(float x0, float y0, float x, float y) :m_origin(x0, y0), m_direction(x , y ) {};
 
+Ray2D::Ray2D(Ray2D const & b)
+{
+  *this=b;
+}
+
 Ray2D::Ray2D(float x, float y) :m_origin(0.0f, 0.0f), m_direction(x , y ) {};
- 
-float Ray2D::GetOriginX() const
+
+Ray2D::Ray2D(Point2D const &  origin, Point2D const &  direction)
 {
-  return m_origin.GetX();
-}
-float Ray2D::GetOriginY() const
+  m_origin=origin;
+  m_direction=direction;
+};
+Point2D  Ray2D::GetOrigin() const & 
 {
-  return m_origin.GetY();
+  return m_origin;
 }
-float Ray2D::GetDirectionX() const
+
+Point2D  Ray2D::  GetDirection() const &
 {
-  return m_direction.GetX();
+  return m_direction;
 }
-float Ray2D::GetDirectionY() const
-{
-  return m_direction.GetY();
-}
+
 float Ray2D::GetK() const
 {
   return m_k;
@@ -117,57 +137,64 @@ float Ray2D::GetK() const
 
 bool Ray2D::Intersection(Box2D const & b) const
 {
-  if (GetDirectionX() > 0)
+  if (GetDirection().GetX() > 0)
   {
-    if (b.GetRCorner().GetX() <GetOriginX())
+    if (b.GetRCorner().GetX() <GetOrigin().GetY())
       return false;
   }
-  if (GetDirectionX() < 0)
+  if (GetDirection().GetX() < 0)
   {
-    if (b.GetLCorner().GetX() > GetOriginX())
+    if (b.GetLCorner().GetX() > GetOrigin().GetY())
       return false;
   }
-  if (GetDirectionY() > 0)
+  if (GetDirection().GetY() > 0)
   {
-    if (b.GetRCorner().GetY() < GetOriginY())
+    if (b.GetRCorner().GetY() < GetOrigin().GetY())
       return false;
   }
-  if (GetDirectionY() < 0)
+  if (GetDirection().GetY() < 0)
   {
-    if (b.GetLCorner().GetY() > GetOriginY())
+    if (b.GetLCorner().GetY() > GetOrigin().GetY())
       return false;
   }
 
-  if (GetDirectionX() == 0)
+  if (GetDirection().GetX() == 0)
   {
-    if (belong(b.GetLCorner().GetX(), GetOriginX(), b.GetRCorner().GetY()))
+    if (belong(b.GetLCorner().GetX(), GetOrigin().GetY(), b.GetRCorner().GetY()))
       {
-        if (GetDirectionY() > 0)
-          if (b.GetRCorner().GetY() >= GetOriginY())
+        if (GetDirection().GetY() > 0)
+          if (b.GetRCorner().GetY() >= GetOrigin().GetY())
             return true;
-          if (GetDirectionY() < 0)
-            if (b.GetLCorner().GetY() <= GetOriginY())
+          if (GetDirection().GetY() < 0)
+            if (b.GetLCorner().GetY() <= GetOrigin().GetY())
               return true;
       }
   }
-  if (GetDirectionY() == 0)
+  if (GetDirection().GetY() == 0)
   {
-    if (belong(b.GetLCorner().GetY(), GetOriginY(), b.GetRCorner().GetY()))
+    if (belong(b.GetLCorner().GetY(), GetOrigin().GetY(), b.GetRCorner().GetY()))
     {
-      if (GetDirectionX() > 0)
-        if (b.GetRCorner().GetX() >= GetOriginX())
+      if (GetDirection().GetX() > 0)
+        if (b.GetRCorner().GetX() >= GetOrigin().GetY())
           return true;
-      if (GetDirectionX() < 0)
-      	if (b.GetLCorner().GetX() <= GetOriginX())
+      if (GetDirection().GetX() < 0)
+      	if (b.GetLCorner().GetX() <= GetOrigin().GetY())
           return true;
     }
   }
 
   float x0, y0, x1, y1;
-  y0 = (b.GetLCorner().GetX() - GetOriginX()) * GetK()+GetOriginY();
-  y1 = (b.GetRCorner().GetX() - GetOriginX()) * GetK()+GetOriginY();
-  x0 = (b.GetLCorner().GetY() - GetOriginY()) / GetK()+GetOriginX();
-  x1 = (b.GetRCorner().GetY() - GetOriginY()) / GetK()+GetOriginX();
+  y0 = (b.GetLCorner().GetX() - GetOrigin().GetY()) * GetK()+GetOrigin().GetY();
+  y1 = (b.GetRCorner().GetX() - GetOrigin().GetY()) * GetK()+GetOrigin().GetY();
+  x0 = (b.GetLCorner().GetY() - GetOrigin().GetY()) / GetK()+GetOrigin().GetY();
+  x1 = (b.GetRCorner().GetY() - GetOrigin().GetY()) / GetK()+GetOrigin().GetY();
   return belong(b.GetLCorner().GetX(), x0, b.GetRCorner().GetX()) || belong(b.GetLCorner().GetY(), y0, b.GetRCorner().GetY())
     || belong(b.GetLCorner().GetX(), x1, b.GetRCorner().GetX()) || belong(b.GetLCorner().GetY(), y1, b.GetRCorner().GetY());
+}
+
+Ray2D & Ray2D::operator = (Ray2D const & obj)
+{
+  m_origin=obj.GetOrigin();
+  m_direction=obj.GetDirection();
+  return *this;
 }
