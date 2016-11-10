@@ -15,6 +15,7 @@ public:
   float GetDamage() const;
   void SetHealth(float a);
 
+  virtual ~GameEntity()=default;
 private:
   Box2D  m_body;
   Ray2D m_direction;
