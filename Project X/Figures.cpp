@@ -116,8 +116,8 @@ bool Box2D::operator == (Box2D const & obj) const
 }
 Box2D & Box2D::operator = (Box2D && obj)
 {
-  Box2D b = std::move(obj);
-  *this = b;
+  std::swap(m_lCorner, obj.GetLCorner());
+  std::swap(m_rCorner, obj.GetRCorner());
   return *this;
 }
 
@@ -221,7 +221,7 @@ bool Ray2D::operator == (Ray2D const & obj) const
 }
 Ray2D & Ray2D::operator = (Ray2D && obj)
 {
-  Ray2D r = std::move(obj);
-  *this = r;
+  std::swap(m_origin, obj.GetOrigin());
+  std::swap(m_direction, obj.GetDirection());
   return *this;
 }
