@@ -78,9 +78,9 @@ TEST(Box2D_test, test_assignment)
   Box2D b2;
   b2=b1;
   EXPECT_EQ(b2, Box2D(1,1,2,2) );
-  b2 = Box2D(2, 2, 3, 3);
-  b1<=b2;
-  EXPECT_EQ(b1, Box2D(2, 2, 3, 3) );
+  b2 = Box2D(0, 0, 1, 1);
+  b1 = std::move(b2);
+  EXPECT_EQ(b1, Box2D(0, 0, 1, 1));
 }
 TEST(ray_test, box_test)
 {
@@ -110,9 +110,9 @@ TEST(Ray2D_test, test_assignment)
   Ray2D r2;
   r2 = r1;
   EXPECT_EQ(r2, Ray2D(1, 1, 2, 2));
-  r2 = Ray2D(2, 2, 3, 3);
-  r1<=r2;
-  EXPECT_EQ(r1, Ray2D(2, 2, 3, 3));
+  r2 =Ray2D(0,0,1,1);
+  r1=std::move(r2);
+  EXPECT_EQ(r1, Ray2D(0,0, 1, 1));
 }
 TEST(rayBox_test, ray_and_box_intersection)
 {

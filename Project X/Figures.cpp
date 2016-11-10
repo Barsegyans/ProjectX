@@ -108,15 +108,16 @@ Box2D & Box2D::operator = (Box2D const & obj)
 {
   m_lCorner=obj.GetLCorner();
   m_rCorner=obj.GetRCorner();
-	return *this;
+  return *this;
 }
 bool Box2D::operator == (Box2D const & obj) const
 {
   return (m_lCorner==obj.GetLCorner())&&(m_rCorner==obj.GetRCorner());
 }
-Box2D Box2D::operator <= (Box2D & obj)
+Box2D & Box2D::operator = (Box2D && obj)
 {
-  *this = std::move(obj);
+  Box2D b = std::move(obj);
+  *this = b;
   return *this;
 }
 
@@ -218,8 +219,9 @@ bool Ray2D::operator == (Ray2D const & obj) const
 {
   return (m_origin == obj.GetOrigin()) && (m_direction == obj.GetDirection());
 }
-Ray2D Ray2D::operator <= (Ray2D & obj)
+Ray2D & Ray2D::operator = (Ray2D && obj)
 {
-  *this = std::move(obj);
+  Ray2D r = std::move(obj);
+  *this = r;
   return *this;
 }

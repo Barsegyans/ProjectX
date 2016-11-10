@@ -26,8 +26,8 @@ public:
 	
   bool Intersection(Box2D const & obj) const;//проверка на пересечение
   Box2D & operator = (Box2D const & obj);
+  Box2D & operator = (Box2D && obj);
   bool operator == (Box2D const & obj) const;
-  Box2D operator <= (Box2D & obj);// оператор перемещения
 
   ~Box2D()=default;
 private:
@@ -49,8 +49,8 @@ public:
   bool Intersection(Box2D const & obj) const;
 
   Ray2D & operator = (Ray2D const & obj);
+  Ray2D & operator = (Ray2D && obj);
   bool operator == (Ray2D const & obj) const;
-  Ray2D operator <= (Ray2D & obj);// оператор перемещения
 
   ~Ray2D() = default;
 private:
