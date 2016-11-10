@@ -23,6 +23,12 @@ Box2D::Box2D(float x, float y)
   m_rCorner = Point2D(x, y);
   Correctness();
 };
+Box2D::Box2D(Box2D && obj)
+{
+  std::swap(m_lCorner,obj.GetLCorner());
+  std::swap(m_rCorner, obj.GetRCorner());
+}
+
 void Box2D::Correctness()  
 {
   if (m_lCorner.GetX() == m_rCorner.GetX())
@@ -97,11 +103,22 @@ bool Box2D::Intersection(Box2D const & box) const
     return true; 
   box.GetLCorner().GetX();
 };
+
 Box2D & Box2D::operator = (Box2D const & obj)
 {
   m_lCorner=obj.GetLCorner();
   m_rCorner=obj.GetRCorner();
-	return *this;
+  return *this;
+}
+bool Box2D::operator == (Box2D const & obj) const
+{
+  return (m_lCorner==obj.GetLCorner())&&(m_rCorner==obj.GetRCorner());
+}
+Box2D & Box2D::operator = (Box2D && obj)
+{
+  std::swap(m_lCorner, obj.GetLCorner());
+  std::swap(m_rCorner, obj.GetRCorner());
+  return *this;
 }
 
 ///////////////////////////////////////////ЛУЧ
@@ -196,5 +213,15 @@ Ray2D & Ray2D::operator = (Ray2D const & obj)
 {
   m_origin=obj.GetOrigin();
   m_direction=obj.GetDirection();
+  return *this;
+}
+bool Ray2D::operator == (Ray2D const & obj) const
+{
+  return (m_origin == obj.GetOrigin()) && (m_direction == obj.GetDirection());
+}
+Ray2D & Ray2D::operator = (Ray2D && obj)
+{
+  std::swap(m_origin, obj.GetOrigin());
+  std::swap(m_direction, obj.GetDirection());
   return *this;
 }
