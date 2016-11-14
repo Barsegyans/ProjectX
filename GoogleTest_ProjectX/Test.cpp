@@ -82,6 +82,20 @@ TEST(Box2D_test, test_assignment)
   b1 = std::move(b2);
   EXPECT_EQ(b1, Box2D(0, 0, 1, 1));
 }
+TEST(Box2D_test, test_exceptions)
+{
+  bool execution=false;
+  try
+  {
+  Box2D b(1,1,1,2);
+  }
+  catch(std::invalid_argument & ex)
+  {
+  execution = true;
+  }
+  EXPECT_EQ(execution, true);
+}
+
 TEST(ray_test, box_test)
 {
   Ray2D ray1(0, 0, 1, 1);
@@ -136,7 +150,46 @@ TEST(rayBox_test, ray_and_box_intersection)
  }
 
 //.....................................................................
+TEST(GameEntity_test, test_construction)
+{
 
+
+  GameEntity ge1(Box2D(0, 0, 1, 1),100);
+  GameEntity ge2(Box2D(0, 0, 1, 1),Ray2D(1,1,0,1), 100);
+
+  EXPECT_EQ(ge1.GetBody(), Box2D(0, 0, 1, 1));
+  EXPECT_EQ(ge2.GetBody(), Box2D(0, 0, 1, 1));
+
+  EXPECT_EQ(ge2.GetRay(), Ray2D(1,1, 0, 1));
+
+  EXPECT_EQ(ge2.GetDamage(), 100);
+  EXPECT_EQ(ge1.GetHealth(), 100);
+}
+
+TEST(GameEntity_test, test_exceptions)
+{
+  bool execution = false;
+  try
+  {
+    GameEntity(Box2D(1,1,2,2),-2);
+  }
+  catch (std::invalid_argument & ex)
+  {
+    execution = true;
+  }
+  EXPECT_EQ(execution, true);
+  
+  execution = false;
+  try
+  {
+    GameEntity(Box2D(1, 1, 2, 2),Ray2D(1,1,1,1), -2);
+  }
+  catch (std::invalid_argument & ex)
+  {
+    execution = true;
+  }
+  EXPECT_EQ(execution, true);
+}
 
 
 TEST(Alien_test, test_construction)
@@ -177,23 +230,40 @@ TEST(Bullet_test, test_construction)
   Ray2D ray(1,1,1,0);
   Box2D box(1,1,2,2);
 
-  Bullet b1(1,1,2,2,0,1);
-  Bullet b2(box,ray.GetDirection());
+  
+  std::list<Bullet> b;
+  b.push_back(Bullet (1,1,2,2,0,1));
+  b.push_back(Bullet (box,ray.GetDirection()));
 
-  EXPECT_EQ(b1.GetBody().GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(b1.GetBody().GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(b.front().GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(b.front().GetBody().GetRCorner(), Point2D(2, 2));
 
-  EXPECT_EQ(b2.GetBody().GetLCorner(), Point2D(1, 1));
-  EXPECT_EQ(b2.GetBody().GetRCorner(), Point2D(2, 2));
+  EXPECT_EQ(b.back().GetBody().GetLCorner(), Point2D(1, 1));
+  EXPECT_EQ(b.back().GetBody().GetRCorner(), Point2D(2, 2));
 
-  EXPECT_EQ(b1.GetRay().GetDirection(), Point2D(0, 1));
-  EXPECT_EQ(b2.GetRay().GetDirection(), Point2D(1, 0));
+  EXPECT_EQ(b.front().GetRay().GetDirection(), Point2D(0, 1));
+  EXPECT_EQ(b.back().GetRay().GetDirection(), Point2D(1, 0));
 
-  EXPECT_EQ(b1.GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
-  EXPECT_EQ(b2.GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
+  EXPECT_EQ(b.front().GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
+  EXPECT_EQ(b.back().GetRay().GetOrigin(), Point2D(1.5f, 1.5f));
 
-  EXPECT_EQ(b1.GetDamage(), 100);
+  EXPECT_EQ(b.front().GetDamage(), 100);
 
+  std::list<Gun> g;
+  g.push_back(Gun (0,0,2,2));
+  g.push_back(Gun (box));
+  std::list<Alien> a;
+  a.push_back(Alien (-1, -1, -0.5, -0.5));
+  a.push_back(Alien (box));
+
+  EXPECT_EQ(b.front().Hit(g),true);
+  EXPECT_EQ(b.back().Hit(a), true);
+
+  EXPECT_EQ(g.front().GetHealth(),0);
+  EXPECT_EQ(g.back().GetHealth(), 100);
+
+  EXPECT_EQ(a.front().GetHealth(), 100);
+  EXPECT_EQ(a.back().GetHealth(), 0);
 }
 TEST(Obstacle_test, test_construction)
 {
@@ -212,8 +282,6 @@ TEST(Obstacle_test, test_construction)
   EXPECT_EQ(o3.GetBody().GetRCorner(), Point2D(3, 3));
 
   Bullet b(-1,-1,0,0,1,1);
-  o2.Hit(b);
-  EXPECT_EQ(o2.GetHealth(), 900);
 }
 
 TEST(Space_test, test_construction)
@@ -231,4 +299,5 @@ TEST(Space_test, test_construction)
 						  
   EXPECT_EQ(s3.GetLCorner(), Point2D(2, 2));
   EXPECT_EQ(s3.GetRCorner(), Point2D(3, 3));
+  system("pause");
 }

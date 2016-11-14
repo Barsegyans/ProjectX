@@ -31,26 +31,8 @@ Box2D::Box2D(Box2D && obj)
 
 void Box2D::Correctness()  
 {
-  if (m_lCorner.GetX() == m_rCorner.GetX())
-  {
-    m_rCorner.AddX(1);
-  }
-  if (m_lCorner.GetY() == m_rCorner.GetY())
-  {
-    m_rCorner.AddY(1);
-  }
-  if (m_lCorner.GetX() > m_rCorner.GetX())
-  {
-    float a = m_lCorner.GetX();
-    m_lCorner.SetX(m_rCorner.GetX());
-    m_rCorner.SetX(a);
-  }
-  if (m_lCorner.GetY() > m_rCorner.GetY())
-  {
-    float a = m_lCorner.GetY();
-    m_lCorner.SetY(m_rCorner.GetY());
-    m_rCorner.SetY(a);
-  }
+  if ((m_lCorner.GetX() == m_rCorner.GetX())||(m_lCorner.GetX() > m_rCorner.GetX())) throw std::invalid_argument("X coordinate of lefr corner must be smaller than the X coordinate of right corner");
+  if ((m_lCorner.GetY() == m_rCorner.GetY())||(m_lCorner.GetY() > m_rCorner.GetY())) throw std::invalid_argument("Y coordinate of lefr corner must be smaller than the Y coordinate of right corner");
 }
 
 double Box2D::GetHeight() const
@@ -179,23 +161,13 @@ bool Ray2D::Intersection(Box2D const & b) const
   {
     if (belong(b.GetLCorner().GetX(), GetOrigin().GetY(), b.GetRCorner().GetY()))
       {
-        if (GetDirection().GetY() > 0)
-          if (b.GetRCorner().GetY() >= GetOrigin().GetY())
             return true;
-          if (GetDirection().GetY() < 0)
-            if (b.GetLCorner().GetY() <= GetOrigin().GetY())
-              return true;
       }
   }
   if (GetDirection().GetY() == 0)
   {
     if (belong(b.GetLCorner().GetY(), GetOrigin().GetY(), b.GetRCorner().GetY()))
     {
-      if (GetDirection().GetX() > 0)
-        if (b.GetRCorner().GetX() >= GetOrigin().GetY())
-          return true;
-      if (GetDirection().GetX() < 0)
-      	if (b.GetLCorner().GetX() <= GetOrigin().GetY())
           return true;
     }
   }
