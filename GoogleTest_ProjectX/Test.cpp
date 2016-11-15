@@ -71,6 +71,9 @@ TEST(box_test, box_test)
   EXPECT_EQ(box4.GetLCorner().GetX(), 1);
   EXPECT_EQ(box4.GetRCorner().GetY(), 1);
   EXPECT_EQ(box4.GetRCorner().GetX(), 2);
+
+  EXPECT_THROW(Box2D(1, 1, 1, 1), std::invalid_argument);
+  EXPECT_THROW(Box2D(1, 1, 0, 2), std::invalid_argument);
 }
 TEST(Box2D_test, test_assignment)
 {
@@ -81,19 +84,6 @@ TEST(Box2D_test, test_assignment)
   b2 = Box2D(0, 0, 1, 1);
   b1 = std::move(b2);
   EXPECT_EQ(b1, Box2D(0, 0, 1, 1));
-}
-TEST(Box2D_test, test_exceptions)
-{
-  bool execution=false;
-  try
-  {
-  Box2D b(1,1,1,2);
-  }
-  catch(std::invalid_argument & ex)
-  {
-  execution = true;
-  }
-  EXPECT_EQ(execution, true);
 }
 
 TEST(ray_test, box_test)
@@ -164,33 +154,9 @@ TEST(GameEntity_test, test_construction)
 
   EXPECT_EQ(ge2.GetDamage(), 100);
   EXPECT_EQ(ge1.GetHealth(), 100);
+  EXPECT_THROW(GameEntity(Box2D(1,1,2,2),-2),std::invalid_argument);
+  EXPECT_THROW(GameEntity(Box2D(1, 1, 0, 2), 4), std::invalid_argument);
 }
-
-TEST(GameEntity_test, test_exceptions)
-{
-  bool execution = false;
-  try
-  {
-    GameEntity(Box2D(1,1,2,2),-2);
-  }
-  catch (std::invalid_argument & ex)
-  {
-    execution = true;
-  }
-  EXPECT_EQ(execution, true);
-  
-  execution = false;
-  try
-  {
-    GameEntity(Box2D(1, 1, 2, 2),Ray2D(1,1,1,1), -2);
-  }
-  catch (std::invalid_argument & ex)
-  {
-    execution = true;
-  }
-  EXPECT_EQ(execution, true);
-}
-
 
 TEST(Alien_test, test_construction)
 {
@@ -299,5 +265,4 @@ TEST(Space_test, test_construction)
 						  
   EXPECT_EQ(s3.GetLCorner(), Point2D(2, 2));
   EXPECT_EQ(s3.GetRCorner(), Point2D(3, 3));
-  system("pause");
 }
