@@ -13,3 +13,35 @@ float Bullet::GetSpeed() const
 {
   return m_speed;
 }
+bool Bullet::Hit(std::list<Gun> & obj)
+{
+  for (auto it = obj.begin(); it != obj.end(); ++it)
+  {
+    if (GetBody().Intersection(it->GetBody()))
+    {
+      it->SetHealth(-GetDamage());
+      return true;
+    }
+  }
+  return false;
+}
+bool Bullet::Hit(std::list<Alien> & obj)
+{
+  for (auto it = obj.begin(); it != obj.end(); ++it)
+    if (GetBody().Intersection(it->GetBody()))
+    {
+      it->SetHealth(-GetDamage());
+      return true;
+    }
+  return false;
+}
+bool Bullet::Hit(std::list<Obstacle> & obj)
+{
+  for (auto it = obj.begin(); it != obj.end(); ++it)
+    if (GetBody().Intersection(it->GetBody()))
+    {
+      it->SetHealth(-GetDamage());
+      return true;
+    }
+  return false;
+}

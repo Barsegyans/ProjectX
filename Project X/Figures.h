@@ -11,7 +11,7 @@ public:
   Box2D(float x, float y);
   Box2D(Point2D const &  lCorner, Point2D const &  rCorner);
   Box2D(Box2D && obj);
- 
+  
   void Correctness();
   double GetHeight() const;// возвращает длину
   double GetWidth() const;//возвращает ширину

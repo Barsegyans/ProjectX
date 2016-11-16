@@ -1,8 +1,14 @@
 ﻿#include"GameEntity.h"
 
 
-GameEntity::GameEntity(Box2D body, float health):m_body(body),m_health(health) {};
-GameEntity::GameEntity(Box2D body, Ray2D dir,float damage):m_body(body),m_direction(dir),m_health(1),m_damage(damage) {};
+GameEntity::GameEntity(Box2D body, float health) :m_body(body), m_health(health)
+{
+  if(m_health <=0)  throw std::invalid_argument("Healt must be greater than 0");
+};
+GameEntity::GameEntity(Box2D body, Ray2D dir,float damage):m_body(body),m_direction(dir),m_health(1),m_damage(damage)
+{
+  if (m_damage <= 0)  throw std::invalid_argument("Damage must be greater than 0");
+};
 
 Box2D GameEntity::GetBody() const &
 {
@@ -23,14 +29,4 @@ void GameEntity::SetHealth(float a)
 float GameEntity::GetDamage() const
 {
   return m_damage;
-}
-bool GameEntity::Hit(GameEntity & g)
-{
-  if (m_body.Intersection(g.GetBody()))
-  {
-     m_health -= g.GetDamage();
-     g.SetHealth(-m_damage);
-  return true;
-  }
-  return false;
 }

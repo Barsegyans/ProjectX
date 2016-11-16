@@ -1,9 +1,11 @@
 ﻿#pragma once
-#include<iostream>
-#include<math.h>
-#include<ctime>
+#include <iostream>
+#include <math.h>
+#include <ctime>
 #include <string> 
 #include <ostream>
+#include <vector>
+#include<list>
 
 float const kEps = 1e-5f;
 float const pi = 3.14159265358979323846f;
@@ -32,3 +34,6 @@ private:
   float m_x = 0.0f, m_y = 0.0f;
 };
   std::ostream & operator << (std::ostream & os, Point2D const & obj);
+
+
+  class ExceptionDivisionByZero : public std::exception {};
