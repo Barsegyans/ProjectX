@@ -6,17 +6,17 @@
 
 int main()
 {
-	CLogger::GetLogger()->Log("Game started");
-	try
-	{
+  CLogger::GetLogger()->Log("Game started");
+  try
+  {
+ 
+  }
+  catch (...)
+  {
+    CLogger::GetLogger()->Log("Unknown error!");
+    std::cerr << "Unknown error!";
+  }
 
-	}
-	catch (...)
-	{
-		CLogger::GetLogger()->Log("Unknown error!");
-		std::cerr << "Unknown error!";
-	}
-
-	_getch();
-	return 0;
+  _getch();
+  return 0;
 }

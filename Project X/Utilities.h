@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -9,7 +8,7 @@ namespace Util
 	// Get current date/time, format is YYYY-MM-DD.HH:mm:ss
 	const std::string CurrentDateTime()
 	{
-		time_t     now = time(NULL);
+	  time_t     now = time(NULL);
 		struct tm  tstruct;
 		char       buf[80];
 		localtime_s(&tstruct, &now);
