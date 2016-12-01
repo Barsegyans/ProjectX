@@ -1,19 +1,22 @@
 ﻿#include <iostream>
 #include"Figures.h"
 #include <conio.h>
-
+#include "Logger.h"
+#include <string>
 
 int main()
 {
-  try
-  {
-  
-  }
-  catch (...)
-  {
-    std::cerr << "Unknown error!";
-  }
+	CLogger::GetLogger()->Log("Game started");
+	try
+	{
 
-  _getch();
-  return 0;
+	}
+	catch (...)
+	{
+		CLogger::GetLogger()->Log("Unknown error!");
+		std::cerr << "Unknown error!";
+	}
+
+	_getch();
+	return 0;
 }
