@@ -2,12 +2,12 @@
 #include "Logger.h"
 #include"Utilities.h"
 const string CLogger::m_sFileName = "Log.txt";
-CLogger* CLogger::m_pThis = NULL;
+CLogger* CLogger::m_pThis = nullptr;
 ofstream CLogger::m_Logfile;
 CLogger::CLogger(){}
 CLogger* CLogger::GetLogger()
 {
-  if (m_pThis == NULL) 
+  if (m_pThis == nullptr) 
   {
     m_pThis = new CLogger();
     m_Logfile.open(m_sFileName.c_str(), ios::out | ios::app);
@@ -17,7 +17,7 @@ CLogger* CLogger::GetLogger()
 
 void CLogger::Log(const char * format, ...)
 {
-  char* sMessage = NULL;
+  char* sMessage = nullptr;
   int nLength = 0;
   va_list args;
   va_start(args, format);
@@ -35,12 +35,10 @@ void CLogger::Log(const char * format, ...)
 
 
 template<typename T> void CLogger::Log(T const & logMessage)
-
 {
   (const string&)logMessage;
   logfile << Util::CurrentDateTime() << ":\t";
   logfile << logMessage << "\n";
-
 }
 
 template<typename T>CLogger& CLogger::operator<<(T const & logMessage)

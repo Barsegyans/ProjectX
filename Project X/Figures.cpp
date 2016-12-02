@@ -168,7 +168,7 @@ bool Ray2D::Intersection(Box2D const & b) const
   {
     if (belong(b.GetLCorner().GetY(), GetOrigin().GetY(), b.GetRCorner().GetY()))
     {
-          return true;
+      return true;
     }
   }
 
