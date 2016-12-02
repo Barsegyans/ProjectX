@@ -7,6 +7,7 @@
 #include"Gun.h"
 #include"Obstacle.h"
 #include"Space.h"
+#include"Logger.h"
 
 TEST(Point2D_test, test_construction)
 {
@@ -265,4 +266,20 @@ TEST(Space_test, test_construction)
 						  
   EXPECT_EQ(s3.GetLCorner(), Point2D(2, 2));
   EXPECT_EQ(s3.GetRCorner(), Point2D(3, 3));
+}
+
+
+TEST(Logger_test, test)
+{
+  bool check=false;
+  std::ifstream f("Log.txt");
+  if (f.is_open())
+  {
+    std::string str;
+    f >> str;
+    if(!(str==""))
+    check=true;
+    f.close();
+  }
+  EXPECT_EQ(check,true);
 }
